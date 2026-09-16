@@ -563,6 +563,149 @@
     .footer-row{flex-direction:column; text-align:center;}
     .footer-meta{text-align:center;}
   }
+
+  /* ---------- Live availability ---------- */
+  .availability{
+    border-block:1px solid var(--line);
+  }
+  .avail-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:6px;
+    box-shadow:var(--shadow);
+    padding:48px;
+    text-align:center;
+  }
+  .avail-count{
+    font-size:clamp(2.6rem, 6vw, 3.6rem);
+    font-weight:700;
+    margin:0;
+    line-height:1;
+  }
+  .avail-count-label{
+    font-size:1.1rem;
+    font-weight:700;
+    margin-top:10px;
+  }
+  .avail-subtext{
+    color:var(--ink-soft);
+    max-width:440px;
+    margin:12px auto 30px;
+    font-size:1rem;
+  }
+  .avail-avatars{display:flex; justify-content:center; margin-bottom:28px;}
+  .avail-avatars .av{
+    width:42px; height:42px; border-radius:50%;
+    border:3px solid var(--surface); margin-left:-12px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.92rem; font-weight:700; color:#fff;
+  }
+  .avail-avatars .av:first-child{margin-left:0;}
+  .avail-avatars .av.more{background:var(--surface-2); color:var(--ink-soft); border-color:var(--surface);}
+  .avail-stats{
+    display:flex; justify-content:center; gap:44px;
+    margin-top:38px; padding-top:30px;
+    border-top:1px solid var(--line);
+    flex-wrap:wrap;
+  }
+  .avail-stats .stat{text-align:center;}
+  .avail-stats .num{font-size:1.4rem; font-weight:700;}
+  .avail-stats .lbl{font-size:.85rem; color:var(--ink-soft); margin-top:4px;}
+
+  /* ---------- Sign up ---------- */
+  .signup{
+    background:var(--surface-2);
+    border-block:1px solid var(--line);
+  }
+  .signup-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+  }
+  .signup-card, .directory-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:6px;
+    box-shadow:var(--shadow);
+    padding:34px;
+  }
+  .privacy-note{
+    display:flex; gap:10px;
+    background:var(--surface-2);
+    border:1px solid var(--line);
+    font-size:.9rem;
+    line-height:1.5;
+    padding:12px 14px;
+    border-radius:6px;
+    margin-bottom:22px;
+  }
+  .signup-card form{display:flex; flex-direction:column; gap:14px;}
+  .form-field label{
+    display:block;
+    font-size:.86rem;
+    font-weight:700;
+    margin-bottom:5px;
+  }
+  .form-field input{
+    width:100%;
+    padding:11px 13px;
+    border-radius:4px;
+    border:1px solid var(--line);
+    background:var(--bg);
+    color:var(--ink);
+    font-family:inherit;
+    font-size:.95rem;
+    outline:none;
+  }
+  .form-field input:focus{border-color:var(--gold-deep);}
+  .form-field small{display:block; margin-top:4px; color:var(--ink-soft); font-size:.8rem;}
+  .form-submit{
+    margin-top:6px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    background:var(--blue);
+    color:#FDFBF0;
+    font-size:1rem;
+    padding:13px 20px;
+    border-radius:3px;
+    border:none;
+    cursor:pointer;
+    box-shadow:var(--shadow);
+    transition:transform .15s ease, background .15s ease;
+    font-family:inherit;
+  }
+  .form-submit:hover{background:var(--gold-deep); transform:translateY(-1px);}
+  .form-submit:disabled{opacity:.6; cursor:default;}
+  .form-msg{display:none; font-size:.86rem; padding:10px 12px; border-radius:5px; margin-top:4px;}
+
+  .directory-card h3{font-size:1.15rem; margin:0 0 16px; font-weight:700;}
+  .drow{
+    display:flex; align-items:center; gap:12px;
+    padding:11px 12px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    margin-bottom:8px;
+  }
+  .drow .av{
+    width:36px; height:36px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700; font-size:.85rem;
+    flex-shrink:0;
+  }
+  .drow .dinfo{flex:1; min-width:0;}
+  .drow .dname{font-weight:700; font-size:.92rem;}
+  .drow .dmeta{font-size:.8rem; color:var(--ink-soft); margin-top:1px;}
+  .drow .dtag{
+    font-size:.68rem; color:var(--ink-soft);
+    border:1px dashed var(--line);
+    padding:2px 8px; border-radius:100px; white-space:nowrap;
+  }
+
+  @media (max-width:900px){
+    .signup-grid{grid-template-columns:1fr;}
+  }
 </style>
 </head>
 <body>
@@ -668,6 +811,78 @@
     </div>
   </section>
 
+  <section class="availability" id="availability">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Live availability</p>
+        <h2>See who&rsquo;s ready to match, right now.</h2>
+        <p>A live count of students actively looking for a roommate through OffCampus Dubai.</p>
+      </div>
+      <div class="avail-card">
+        <p class="avail-count" id="availCount">128</p>
+        <p class="avail-count-label">people available to match with right now</p>
+        <p class="avail-subtext">Verified students actively looking for a place near their university &mdash; updated as new students join below.</p>
+        <div class="avail-avatars">
+          <div class="av" style="background:#1B2340;">A</div>
+          <div class="av" style="background:#A9741F;">M</div>
+          <div class="av" style="background:#3E6EA5;">J</div>
+          <div class="av" style="background:#B65C42;">S</div>
+          <div class="av more">+124</div>
+        </div>
+        <a class="btn-primary" href="#signup">Add yourself to the list</a>
+        <div class="avail-stats">
+          <div class="stat"><div class="num">128</div><div class="lbl">Available now</div></div>
+          <div class="stat"><div class="num">34</div><div class="lbl">New this week</div></div>
+          <div class="stat"><div class="num">92%</div><div class="lbl">Match rate</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="signup" id="signup">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Join the list</p>
+        <h2>List yourself as available.</h2>
+      </div>
+      <div class="signup-grid">
+        <div class="signup-card">
+          <div class="privacy-note">&#128274; Your contact number is emailed to us directly and never published on this page.</div>
+          <form id="roommateSignupForm">
+            <div class="form-field"><label for="rm-name">Full name</label><input type="text" id="rm-name" name="name" required placeholder="e.g. Ahmed Al Rashid"></div>
+            <div class="form-field"><label for="rm-country">Country</label><input type="text" id="rm-country" name="country" required placeholder="e.g. UAE"></div>
+            <div class="form-field"><label for="rm-university">University</label><input type="text" id="rm-university" name="university" required placeholder="e.g. American University of Sharjah"></div>
+            <div class="form-field">
+              <label for="rm-contact">Contact number</label>
+              <input type="tel" id="rm-contact" name="contact_number" required placeholder="e.g. +971 50 123 4567">
+              <small>Sent only to us by email &mdash; never shown on the website.</small>
+            </div>
+            <button type="submit" class="form-submit" id="rmSubmitBtn">Submit</button>
+            <div class="form-msg" id="rmFormMsg"></div>
+          </form>
+        </div>
+        <div class="directory-card">
+          <h3>Currently listed</h3>
+          <div class="drow">
+            <div class="av" style="background:#1B2340;">A</div>
+            <div class="dinfo"><div class="dname">Ahmed R.</div><div class="dmeta">UAE &middot; American University of Sharjah</div></div>
+            <div class="dtag">via us</div>
+          </div>
+          <div class="drow">
+            <div class="av" style="background:#A9741F;">M</div>
+            <div class="dinfo"><div class="dname">Maria S.</div><div class="dmeta">Spain &middot; University of Dubai</div></div>
+            <div class="dtag">via us</div>
+          </div>
+          <div class="drow">
+            <div class="av" style="background:#3E6EA5;">J</div>
+            <div class="dinfo"><div class="dname">Jae-won K.</div><div class="dmeta">South Korea &middot; Heriot-Watt Dubai</div></div>
+            <div class="dtag">via us</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="how-it-works">
     <div class="wrap">
       <div class="section-head">
@@ -734,5 +949,57 @@
     </div>
   </div>
 </footer>
+<script>
+(function(){
+  var form = document.getElementById('roommateSignupForm');
+  if(!form) return;
+  var msg = document.getElementById('rmFormMsg');
+  var btn = document.getElementById('rmSubmitBtn');
+  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/Offcampusdubai@gmail.com';
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    msg.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    var data = {
+      name: form.name.value,
+      country: form.country.value,
+      university: form.university.value,
+      contact_number: form.contact_number.value,
+      _subject: 'New roommate sign-up: ' + form.name.value
+    };
+
+    fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    })
+      .then(function(res){ return res.json().then(function(json){ return { ok: res.ok, json: json }; }); })
+      .then(function(result){
+        msg.style.display = 'block';
+        if (result.ok) {
+          msg.style.background = 'rgba(169,116,31,0.12)';
+          msg.style.color = 'var(--gold-deep)';
+          msg.textContent = "Thanks! We've received your details — your contact number stays private.";
+          form.reset();
+        } else {
+          throw new Error('Submission failed');
+        }
+      })
+      .catch(function(){
+        msg.style.display = 'block';
+        msg.style.background = 'rgba(182,92,66,0.12)';
+        msg.style.color = 'var(--terracotta)';
+        msg.textContent = 'Something went wrong sending this — please try again in a moment.';
+      })
+      .finally(function(){
+        btn.disabled = false;
+        btn.textContent = 'Submit';
+      });
+  });
+})();
+</script>
 </body>
 </html>
